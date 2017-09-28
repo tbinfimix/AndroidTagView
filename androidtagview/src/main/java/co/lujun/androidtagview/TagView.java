@@ -131,6 +131,8 @@ public class TagView extends View {
 
     private boolean unSupportedClipPath = false;
 
+    private String mTagId;
+
     private Runnable mLongClickHandle = new Runnable() {
         @Override
         public void run() {
@@ -310,7 +312,7 @@ public class TagView extends View {
                 case MotionEvent.ACTION_UP:
                     isUp = true;
                     if (!isExecLongClick && !isMoved) {
-                        mOnTagClickListener.onTagClick((int) getTag(), getText());
+                        mOnTagClickListener.onTagClick((int) getTag(), getText(), getTagId());
                     }
                     break;
             }
@@ -406,6 +408,14 @@ public class TagView extends View {
         return mOriginText;
     }
 
+    public String getTagId() {
+        return mTagId;
+    }
+
+    public void setTagId(String tagId) {
+        mTagId = tagId;
+    }
+
     public boolean getIsViewClickable(){
         return isViewClickable;
     }
@@ -457,7 +467,7 @@ public class TagView extends View {
     }
 
     public interface OnTagClickListener{
-        void onTagClick(int position, String text);
+        void onTagClick(int position, String text, String id);
         void onTagLongClick(int position, String text);
         void onTagCrossClick(int position);
     }

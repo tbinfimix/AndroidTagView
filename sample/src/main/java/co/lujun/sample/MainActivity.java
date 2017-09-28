@@ -76,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
         // Set custom click listener
         mTagContainerLayout1.setOnTagClickListener(new TagView.OnTagClickListener() {
             @Override
-            public void onTagClick(int position, String text) {
-                Toast.makeText(MainActivity.this, "click-position:" + position + ", text:" + text,
+            public void onTagClick(int position, String text, String tagId) {
+                Toast.makeText(MainActivity.this, "click-position:" + position + ", text:" + text + ", tagId: " + tagId,
                         Toast.LENGTH_SHORT).show();
             }
 
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         btnAddTag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mTagContainerLayout1.addTag(text.getText().toString());
+                mTagContainerLayout1.addTag(text.getText().toString(), "");
                 // Add tag in the specified position
 //                mTagContainerLayout1.addTag(text.getText().toString(), 4);
             }

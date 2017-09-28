@@ -341,7 +341,7 @@ public class TagContainerLayout extends ViewGroup {
         setTagVerticalPadding(mTagVerticalPadding);
 
         if (isInEditMode()) {
-            addTag("sample tag");
+            addTag("sample tag", "");
         }
     }
 
@@ -516,17 +516,18 @@ public class TagContainerLayout extends ViewGroup {
             return;
         }
         for (int i = 0; i < mTags.size(); i++) {
-            onAddTag(mTags.get(i), mChildViews.size());
+            onAddTag(mTags.get(i), mChildViews.size(), "");
         }
         postInvalidate();
     }
 
-    private void onAddTag(String text, int position) {
+    private void onAddTag(String text, int position, String tagId) {
         if (position < 0 || position > mChildViews.size()) {
             throw new RuntimeException("Illegal position!");
         }
         TagView tagView = new TagView(getContext(), text);
         initTagView(tagView, position);
+        tagView.setTagId(tagId);
         mChildViews.add(position, tagView);
         if (position < mChildViews.size()) {
             for (int i = position; i < mChildViews.size(); i++) {
@@ -766,8 +767,8 @@ public class TagContainerLayout extends ViewGroup {
      *
      * @param text
      */
-    public void addTag(String text) {
-        addTag(text, mChildViews.size());
+    public void addTag(String text, String tagId) {
+        addTag(text, mChildViews.size(), tagId);
     }
 
     /**
@@ -777,8 +778,8 @@ public class TagContainerLayout extends ViewGroup {
      * @param text
      * @param position
      */
-    public void addTag(String text, int position) {
-        onAddTag(text, position);
+    public void addTag(String text, int position, String tagId) {
+        onAddTag(text, position, tagId);
         postInvalidate();
     }
 
